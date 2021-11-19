@@ -29,8 +29,3 @@ int size;
 		delete[] tab[a];
 	}
 }
-/*void liczby() {
-
-
-
-}*/
