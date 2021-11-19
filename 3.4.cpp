@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 int main()
 {
@@ -14,6 +14,11 @@ int size;
 	for (int i = 0; i < size; i++) {
 		cout << endl;
 		for (int j = 0; j < i + 1; j++) {
+			if (j == 0) {
+				for (int space = size-i; space > 0; space--) {
+					cout << " ";
+				}
+			}
 			if (j == 0 || j == i) {
 				tab[i][j] = 1;
 				cout << " " << tab[i][j]<<" ";
