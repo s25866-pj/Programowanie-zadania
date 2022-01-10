@@ -1,0 +1,25 @@
+#include<string>
+using namespace std;
+
+int kont_str(int n, char st){
+    if (n==0){
+        return st;
+    }
+    else{
+        return kont_str(n, st)+kont_str(n-1, st);
+    }
+    
+}
+
+int main()
+{
+    cout>>"podaj n: \n";
+    cin >>n ;
+    char st;
+    
+    cout>>"podaj napis: \n";
+    cin >>st ;
+    kont_str(n,st)
+
+    return 0;
+}
