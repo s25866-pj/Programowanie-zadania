@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-//#define N 9
 int siatka[9][9]={
    {3,0,6,5,0,8,4,0,0},
    {5,2,0,0,0,0,0,0,0},
@@ -31,8 +30,8 @@ void wypisanie(){
 
 //sprawdznie czy w wierszu(poziomo)są liczby
 bool spr_wiersz(int n, int wiersz){
-    for(int i =0;i<9;i++){
-        if(siatka[wiersz][i]==n){
+    for(int kolumna =0;kolumna<9;kolumna++){
+        if(siatka[wiersz][kolumna]==n){
             return true;
         }
     }
@@ -41,8 +40,8 @@ bool spr_wiersz(int n, int wiersz){
 
 //sprawdznie czy w kolumnia(pionowo)są liczby
 bool spr_kolumna(int n, int kolumna){
-    for(int i = 0;i<9;i++){
-        if(siatka[i][kolumna]==n){
+    for(int wiersz = 0; wiersz < 9;wiersz++){
+        if(siatka[wiersz][kolumna]==n){
             return true;
         }
     }
@@ -53,25 +52,26 @@ bool spr_kolumna(int n, int kolumna){
 bool spr_kostka(int n,int wiersz_cub,int kolumna_cub){
     for (int i=0;i<3;i++){
         for(int j=0;j<3;j++){
-            if(siatka[wiersz_cub+i][kolumna_cub+j]==0){
+            if(siatka[wiersz_cub+i][kolumna_cub+j]==n){
                 return true;
             }
         }
     }
     return false;
-};
+}
+
 
 //sprawdzanie czy zostały "wolne"miejsca(czy sa 0)
 bool sprawdz_0(int &wiersz, int &kolumna){
       for(int wiersz=0;wiersz<9;wiersz++){
         for(int kolumna=0;kolumna<9;kolumna++){
             if(siatka[kolumna][wiersz]==0){
-                return false;
+                return true;
             }
         }
           
       }
-    return true;
+    return false;
 }
 
 
@@ -99,27 +99,25 @@ bool rozwiazane_sudoku(){
         }
     }
          
-    return true;
+    return false;
 }
-void sudoku_rozwiazane(){ 
-   for (int wiersz = 0; wiersz < 9; wiersz++){
-             cout << endl;
-      for (int kolumna = 0; kolumna < 9; kolumna){
-          cout<<siatka[wiersz][kolumna];
-      }
-   }
-} 
+
+// void sudoku_wypisz(){ 
+//   for (int wiersz = 0; wiersz < 9; wiersz++){
+//              cout << endl;
+//       for (int kolumna = 0; kolumna < 9; kolumna){
+//           cout<<siatka[wiersz][kolumna];
+//       }
+//   }
+// } 
     
 
 int main() {
     wypisanie();
 if (rozwiazane_sudoku()==true){
-    sudoku_rozwiazane();
-    cout<<"sudoku rozwiazane";
-    return 0;
+    wypisanie();
 }
 else{
     cout<<"brak rozwiazania";
-    return 0;
 }
 }
