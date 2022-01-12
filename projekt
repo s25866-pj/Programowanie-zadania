@@ -29,9 +29,13 @@ void wypisanie(){
         }
     }
 }
-bool wiersz(){}
-bool kolumna(){}
-bool kostka(){}
+bool wiersz(int n){
+    
+}
+bool kolumna(int n, int wiersz){
+    if ()
+}
+bool kostka(int n,int kolumna){}
 bool sprawdz_0(){
       for(int i=0;i<9;i++){
         for(int j=0;j<9;j++){
@@ -43,8 +47,11 @@ bool sprawdz_0(){
       }
     return true;
 }
-bool czy_pasuje(int n){
-    if(wiersz() && kolumna() && kostka())
+bool czy_pasuje(int n, int wiersz, int kolumna){
+    if(!wiersz(n,wiersz) && !kolumna(n,kolumna) && !kostka(n,wiersz-wiersz%3,kolumna-kolumna%3)){
+        return true;
+    }
+    return false;
 }
 bool rozwiazane_sudoku(){
     if(!sprawdz_0()){
@@ -53,7 +60,13 @@ bool rozwiazane_sudoku(){
     }
     else{
         for(int num=1;n<10;n++){
-            czy_pasuje(num)
+            for(int wiersz=0;wiersz<9;wiesz++){
+                for(int kolumna=0;kolumna<9;kolumna++){
+                   czy_pasuje(num,wiersz,kolumna)
+                   } 
+                }
+            }
+            
         }
         return true; 
     }
