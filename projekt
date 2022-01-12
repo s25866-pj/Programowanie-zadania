@@ -18,13 +18,20 @@ void wypisanie(){
     for(int i=0;i<9;i++){
         cout<<endl;
         for(int j=0;j<9;j++){
-            cout<<siatka[i][j];
+            if (siatka[i][j]==0){
+                cout<<"  ";
+            }
+            else{
+                cout<<siatka[i][j]<<" ";
+                
+            }
+            
         }
     }
 }
 
 int main() {
-    
+    wypisanie();
 
     return 0;
 }
