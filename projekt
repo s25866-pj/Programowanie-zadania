@@ -30,7 +30,7 @@ void wypisanie(){
 
 //sprawdznie czy w wierszu(poziomo)są liczby
 bool spr_wiersz(int n, int wiersz){
-    for(int kolumna =0;kolumna<9;kolumna++){
+    for(int kolumna = 0;kolumna<9;kolumna++){
         if(siatka[wiersz][kolumna]==n){
             return true;
         }
@@ -84,11 +84,10 @@ bool czy_pasuje(int n, int wiersz, int kolumna){
 bool rozwiazane_sudoku(){
     int wiersz,kolumna;
     if(!sprawdz_0(wiersz,kolumna)){
-        cout<<"sa miejsca zerowe";
-        return false;
+        return true;
     }
    
-    for(int num=1;num<10;num++){
+    for(int num=1;num<=9;num++){
         if(czy_pasuje(num,wiersz,kolumna)){
             siatka[wiersz][kolumna]=num;
             if(rozwiazane_sudoku()){
@@ -101,16 +100,6 @@ bool rozwiazane_sudoku(){
          
     return false;
 }
-
-// void sudoku_wypisz(){ 
-//   for (int wiersz = 0; wiersz < 9; wiersz++){
-//              cout << endl;
-//       for (int kolumna = 0; kolumna < 9; kolumna){
-//           cout<<siatka[wiersz][kolumna];
-//       }
-//   }
-// } 
-    
 
 int main() {
     wypisanie();
