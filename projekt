@@ -29,9 +29,44 @@ void wypisanie(){
         }
     }
 }
-
+bool wiersz(){}
+bool kolumna(){}
+bool kostka(){}
+bool sprawdz_0(){
+      for(int i=0;i<9;i++){
+        for(int j=0;j<9;j++){
+            if(siatka[i][j]==0){
+                return false;
+            }
+        }
+          
+      }
+    return true;
+}
+bool czy_pasuje(int n){
+    if(wiersz() && kolumna() && kostka())
+}
+bool rozwiazane_sudoku(){
+    if(!sprawdz_0()){
+        cout<<"sa miejsca zerowe";
+        return false;
+    }
+    else{
+        for(int num=1;n<10;n++){
+            czy_pasuje(num)
+        }
+        return true; 
+    }
+    
+}
 int main() {
     wypisanie();
-
+if (rozwiazane_sudoku()){
+    cout<<"sudoku rozwiazane";
     return 0;
+}
+else{
+    cout<<"brak rozwiazania";
+    return 0;
+}
 }
