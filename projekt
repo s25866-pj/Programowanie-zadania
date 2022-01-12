@@ -2,18 +2,17 @@
 using namespace std;
 //#define N 9
 int siatka[9][9]={
-    {0,7,9,8,0,2,0,6,3},
-    {6,0,0,9,0,0,0,1,0},
-    {8,0,3,0,7,0,0,0,2},
-    {0,9,0,0,0,0,3,7,1},
-    {0,6,7,8,0,0,0,9,0},
-    {0,3,1,0,2,0,5,8,0},
-    {2,8,6,5,0,0,1,3,0},
-    {0,0,0,0,0,0,0,0,0},
-    {9,0,4,3,0,0,8,2,7}
-    
+   {3,0,6,5,0,8,4,0,0},
+   {5,2,0,0,0,0,0,0,0},
+   {0,8,7,0,0,0,0,3,1},
+   {0,0,3,0,1,0,0,8,0},
+   {9,0,0,8,6,3,0,0,5},
+   {0,5,0,0,9,0,6,0,0},
+   {1,3,0,0,0,0,2,5,0},
+   {0,0,0,0,0,0,0,7,4},
+   {0,0,5,2,0,6,3,0,0}
 };
-
+//wypisanie całej siatki
 void wypisanie(){
     for(int i=0;i<9;i++){
         cout<<endl;
@@ -29,17 +28,44 @@ void wypisanie(){
         }
     }
 }
-bool wiersz(int n){
-    
+
+//sprawdznie czy w wierszu(poziomo)są liczby
+bool spr_wiersz(int n, int wiersz){
+    for(int i =0;i<9;i++){
+        if(siatka[wiersz][i]==n){
+            return true;
+        }
+    }
+    return false;
 }
-bool kolumna(int n, int wiersz){
-    if ()
+
+//sprawdznie czy w kolumnia(pionowo)są liczby
+bool spr_kolumna(int n, int kolumna){
+    for(int i = 0;i<9;i++){
+        if(siatka[i][kolumna]==n){
+            return true;
+        }
+    }
+    return false;
 }
-bool kostka(int n,int kolumna){}
-bool sprawdz_0(){
-      for(int i=0;i<9;i++){
-        for(int j=0;j<9;j++){
-            if(siatka[i][j]==0){
+
+//sprawdznie czy w polu 3x3 są liczby
+bool spr_kostka(int n,int wiersz_cub,int kolumna_cub){
+    for (int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            if(siatka[wiersz_cub+i][kolumna_cub+j]==0){
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
+//sprawdzanie czy zostały "wolne"miejsca(czy sa 0)
+bool sprawdz_0(int &wiersz, int &kolumna){
+      for(int wiersz=0;wiersz<9;wiersz++){
+        for(int kolumna=0;kolumna<9;kolumna++){
+            if(siatka[kolumna][wiersz]==0){
                 return false;
             }
         }
@@ -47,34 +73,48 @@ bool sprawdz_0(){
       }
     return true;
 }
+
+
 bool czy_pasuje(int n, int wiersz, int kolumna){
-    if(!wiersz(n,wiersz) && !kolumna(n,kolumna) && !kostka(n,wiersz-wiersz%3,kolumna-kolumna%3)){
-        return true;
-    }
-    return false;
+    return !spr_wiersz(n,wiersz) && !spr_kolumna(n,kolumna) && !spr_kostka(n,wiersz-wiersz%3,kolumna-kolumna%3);
+    
 }
+
+
 bool rozwiazane_sudoku(){
-    if(!sprawdz_0()){
+    int wiersz,kolumna;
+    if(!sprawdz_0(wiersz,kolumna)){
         cout<<"sa miejsca zerowe";
         return false;
     }
-    else{
-        for(int num=1;n<10;n++){
-            for(int wiersz=0;wiersz<9;wiesz++){
-                for(int kolumna=0;kolumna<9;kolumna++){
-                   czy_pasuje(num,wiersz,kolumna)
-                   } 
-                }
+   
+    for(int num=1;num<10;num++){
+        if(czy_pasuje(num,wiersz,kolumna)){
+            siatka[wiersz][kolumna]=num;
+            if(rozwiazane_sudoku()){
+                return true;
+                
             }
-            
+            siatka[wiersz][kolumna]=0;
         }
-        return true; 
     }
-    
+         
+    return true;
 }
+void sudoku_rozwiazane(){ 
+   for (int wiersz = 0; wiersz < 9; wiersz++){
+             cout << endl;
+      for (int kolumna = 0; kolumna < 9; kolumna){
+          cout<<siatka[wiersz][kolumna];
+      }
+   }
+} 
+    
+
 int main() {
     wypisanie();
-if (rozwiazane_sudoku()){
+if (rozwiazane_sudoku()==true){
+    sudoku_rozwiazane();
     cout<<"sudoku rozwiazane";
     return 0;
 }
