@@ -1,37 +1,37 @@
 #include <iostream>
 using namespace std;
-int siatka[9][9]={
-   {3,0,6,5,0,8,4,0,0},
-   {5,2,0,0,0,0,0,0,0},
-   {0,8,7,0,0,0,0,3,1},
-   {0,0,3,0,1,0,0,8,0},
-   {9,0,0,8,6,3,0,0,5},
-   {0,5,0,0,9,0,6,0,0},
-   {1,3,0,0,0,0,2,5,0},
-   {0,0,0,0,0,0,0,7,4},
-   {0,0,5,2,0,6,3,0,0}
+int siatka[9][9]= {
+   {0,0,6,0,8,0,0,0,0},
+   {0,0,5,2,0,6,0,1,0},
+   {0,0,0,9,0,4,0,0,5},
+   {0,8,9,1,0,0,6,5,0},
+   {6,0,0,0,0,0,0,0,7},
+   {0,7,4,0,0,5,1,3,0},
+   {4,0,0,3,0,9,0,0,0},
+   {0,1,0,6,0,2,5,0,0},
+   {0,0,0,0,1,0,2,0,0}
 };
 //wypisanie całej siatki
-void wypisanie(){
-    for(int i=0;i<9;i++){
-        cout<<endl;
-        for(int j=0;j<9;j++){
-            if (siatka[i][j]==0){
-                cout<<"  ";
+void wypisanie() {
+    for (int i = 0; i < 9; i++) {
+        cout << endl;
+        for (int j = 0; j < 9; j++) {
+            if (siatka[i][j] == 0) {
+                cout << "  ";
             }
-            else{
-                cout<<siatka[i][j]<<" ";
-                
+            else {
+                cout << siatka[i][j] << " ";
+
             }
-            
+
         }
     }
 }
 
 //sprawdznie czy w wierszu(poziomo)są liczby
-bool spr_wiersz(int n, int wiersz){
-    for(int kolumna = 0;kolumna<9;kolumna++){
-        if(siatka[wiersz][kolumna]==n){
+bool spr_wiersz(int n, int wiersz) {
+    for (int kolumna = 0; kolumna < 9; kolumna++) {
+        if (siatka[wiersz][kolumna] == n) {
             return true;
         }
     }
@@ -39,9 +39,9 @@ bool spr_wiersz(int n, int wiersz){
 }
 
 //sprawdznie czy w kolumnia(pionowo)są liczby
-bool spr_kolumna(int n, int kolumna){
-    for(int wiersz = 0; wiersz < 9;wiersz++){
-        if(siatka[wiersz][kolumna]==n){
+bool spr_kolumna(int n, int kolumna) {
+    for (int wiersz = 0; wiersz < 9; wiersz++) {
+        if (siatka[wiersz][kolumna] == n) {
             return true;
         }
     }
@@ -49,10 +49,10 @@ bool spr_kolumna(int n, int kolumna){
 }
 
 //sprawdznie czy w polu 3x3 są liczby
-bool spr_kostka(int n,int wiersz_cub,int kolumna_cub){
-    for (int i=0;i<3;i++){
-        for(int j=0;j<3;j++){
-            if(siatka[wiersz_cub+i][kolumna_cub+j]==n){
+bool spr_kostka(int n, int wiersz_cub, int kolumna_cub) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (siatka[wiersz_cub + i][kolumna_cub + j] == n) {
                 return true;
             }
         }
@@ -62,51 +62,51 @@ bool spr_kostka(int n,int wiersz_cub,int kolumna_cub){
 
 
 //sprawdzanie czy zostały "wolne"miejsca(czy sa 0)
-bool sprawdz_0(int &wiersz, int &kolumna){
-      for(int wiersz=0;wiersz<9;wiersz++){
-        for(int kolumna=0;kolumna<9;kolumna++){
-            if(siatka[kolumna][wiersz]==0){
+bool sprawdz_0(int &wiersz, int &kolumna) {
+    for (wiersz = 0; wiersz < 9; wiersz++) {
+        for (kolumna = 0; kolumna < 9; kolumna++) {
+            if (siatka[wiersz][kolumna] == 0) {
                 return true;
             }
         }
-          
-      }
+
+    }
     return false;
 }
 
 
-bool czy_pasuje(int n, int wiersz, int kolumna){
-    return !spr_wiersz(n,wiersz) && !spr_kolumna(n,kolumna) && !spr_kostka(n,wiersz-wiersz%3,kolumna-kolumna%3);
-    
+bool czy_pasuje(int n, int wiersz, int kolumna) {
+    return !spr_wiersz(n, wiersz) && !spr_kolumna(n, kolumna) && !spr_kostka(n, wiersz - wiersz %3, kolumna - kolumna % 3);
+
 }
 
 
-bool rozwiazane_sudoku(){
-    int wiersz,kolumna;
-    if(!sprawdz_0(wiersz,kolumna)){
+bool rozwiazane_sudoku() {
+    int wiersz, kolumna;
+    if (!sprawdz_0(wiersz, kolumna)) {
         return true;
     }
-   
-    for(int num=1;num<=9;num++){
-        if(czy_pasuje(num,wiersz,kolumna)){
-            siatka[wiersz][kolumna]=num;
-            if(rozwiazane_sudoku()){
+
+    for (int num = 1; num <= 9; num++) {
+        if (czy_pasuje(num, wiersz, kolumna)) {
+            siatka[wiersz][kolumna] = num;
+            if (rozwiazane_sudoku()) {
                 return true;
-                
+
             }
-            siatka[wiersz][kolumna]=0;
+            siatka[wiersz][kolumna] = 0;
         }
     }
-         
+
     return false;
 }
 
 int main() {
     wypisanie();
-if (rozwiazane_sudoku()==true){
-    wypisanie();
-}
-else{
-    cout<<"brak rozwiazania";
-}
+    if (rozwiazane_sudoku() == true) {
+        wypisanie();
+    }
+    else {
+        cout << "brak rozwiazania";
+    }
 }
